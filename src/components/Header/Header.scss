@@ -1,0 +1,19 @@
+@import "../../scss/variables.scss";
+@import "../../scss/mixins.scss";
+@import "../../scss/_reset.scss";
+
+
+.header {
+@include flex;
+ flex-direction: column;
+ background-color: $color1;
+ height: 30%;
+ width: 100%;
+ padding-top: 2rem;
+ h1 {
+    font-size: min(10vw, 4rem); }
+
+
+ 
+
+}

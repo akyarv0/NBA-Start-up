@@ -3,7 +3,12 @@ import { data } from "../../helper/data";
 import "./CardContainer.scss";
 
 const CardContainer = () => {
-  const [searchTerm, setSearchTerm] = useState(""); // searchTerm, kullanıcı tarafından girilen metni içerecek ve setSearchTerm fonksiyonu ise searchTerm state'ini güncellemek için kullanılacak.
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activePlayer, setActivePlayer] = useState(null); // Yeni state, etkin oyuncunun adını tutar.
+  
+  const toggleStats = (playerName) => {
+    setActivePlayer(activePlayer === playerName ? null : playerName); // Eğer aynı oyuncuysa kapat, değilse etkin oyuncuyu güncelle.
+  };
 
   const searchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -18,31 +23,28 @@ const CardContainer = () => {
       <div className="search">
         <input
           type="text"
-          name=""
-          id=""
           placeholder="Search Player..."
-          value={searchTerm} //  input alanının value'su her değiştiğinde searchTerm state'i de güncellenir.
+          value={searchTerm}
           onChange={searchChange}
         />
       </div>
       <div className="cards">
-        {filteredData.map(
-          (
-            player // yukarıda aradığımız metin ile bulunan oyuncunun bilgilerini burada yaklayıp gösteriyoruz.
-          ) => (
-            <div className="card" key={player.name}>
+        {filteredData.map((player) => (
+          <div className="card" key={player.name} onClick={() => toggleStats(player.name)}>
+            {activePlayer === player.name ?
+              <div className="stats"><ul>
+                {player.statistics.map((statistic, index) => (
+                  <li key={index}>{statistic}</li>
+                ))}
+              </ul></div>
+              :
               <div className="player-img">
                 <img src={player.img} alt="player-img" />
                 <h3>{player.name}</h3>
               </div>
-              <ul className="stats">
-                {player.statistics.map((statistic, index) => (
-                  <li key={index}>{statistic}</li>
-                ))}
-              </ul>
-            </div>
-          )
-        )}
+            }
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -113,13 +113,13 @@ ul {
 
 .stats {
   position: relative;
-
+  margin-top: 1rem;
   gap: 0.5rem;
   list-style-type: none; // Liste işaretlerini kaldır
   background-color: $borderColor;
   padding: 0.5rem;
   border-radius: 10px;
   width: 270px;
-  height: 400px;
+  height: 448px;
   z-index: 3;
 }
